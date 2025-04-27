@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plantilla amb MathJax, Markdown, jQuery i Shoelace</title>
+
+  <!-- Shoelace CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.12.0/cdn/themes/light.css" />
+
+  <!-- Shoelace JS -->
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.12.0/cdn/shoelace.js"></script>
+
+  <!-- MathJax -->
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <!-- Markdown Parser (marked.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 2rem;
+      background-color: #f5f5f5;
+    }
+    #content {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <sl-alert open type="primary" duration="0">
+    Benvingut a la plantilla interactiva!
+  </sl-alert>
+
+  <sl-input id="markdownInput" label="Escriu Markdown amb matemàtiques" placeholder="Escriu aquí..." size="large" filled></sl-input>
+  <sl-button id="renderBtn" variant="success" style="margin-top: 1rem;">Renderitza</sl-button>
+
+  <div id="content" style="margin-top: 2rem;"></div>
+
+  <script>
+    $('#renderBtn').on('click', function () {
+      const raw = $('#markdownInput').val();
+      const html = marked.parse(raw);
+      $('#content').html(html);
+      MathJax.typesetPromise(); // Reprocessa les fórmules matemàtiques
+    });
+  </script>
+
+</body>
+</html>
