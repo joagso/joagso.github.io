@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ca">
 <head>
@@ -45,9 +46,23 @@
 
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
       gap: 1.5rem;
       margin-top: 1rem;
+      grid-template-columns: 1fr; /* Valor por defecto: móvil */
+    }
+
+    /* Tablet pequeña: 2 columnas */
+    @media (min-width: 600px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Tablet grande o PC: 3 columnas */
+    @media (min-width: 900px) {
+      .cards-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
     }
 
     sl-card::part(base) {
